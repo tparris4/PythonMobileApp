@@ -7,12 +7,17 @@ Builder.load_file('design.kv')
 
 
 class LoginScreen(Screen):
-    pass
+    def sign_up(self):
+        self.manager.current = "sign_up_screen"
 
 # template for every app screen
 
 
 class RootWidget(ScreenManager):
+    pass
+
+
+class SignUpScreen(Screen):
     pass
 
 
