@@ -1,26 +1,26 @@
+ #:kivy 1.11.1
 <LoginScreen>:
   GridLayout: 
-  #controls columns
+    cols: 1 
     GridLayout:
+      cols: 1
       Label:
-          text: "User Login"
+        text: "User Login"
       TextInput:
         hint_text: "Username"
       TextInput:
         hint_text: "Password"
       Button:
-          text: "Login"
+        text: "Login"
     GridLayout:
       cols: 2
       Button:
-          text: "Forgot Password?"
+        text: "Forgot Password?"
       Button:
         text:"Sign Up"
 
 
 <RootWidget>:
-# Logic will be coded in python
   LoginScreen:
-    name: "Login_Screen"
+    name: "login_screen"
 
-# <SignUpScreen>:
