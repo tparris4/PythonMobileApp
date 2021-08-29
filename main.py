@@ -5,6 +5,7 @@ import json
 import glob
 from datetime import datetime
 from pathlib import Path
+import random
 # from kivy.uix.gridlayout import GridLayout
 # dir(GridLayout)
 Builder.load_file('design.kv')
@@ -21,7 +22,7 @@ class LoginScreen(Screen):
     def login(self, uname, pword):
         with open("users.json") as file:
             users = json.load(file)
-        if uname in users and users[uname]['password'] = pword:
+        if uname in users and users[uname]['password'] == pword:
             self.manager.current = 'login_screen_success'
         else:
             self.ids.login_wrong.text = "Wrong username or password"
@@ -62,9 +63,19 @@ class LoginScreenSuccess(Screen):
 
     def get_quote(self, feel):
         feel = feel.lower()
-        available_feelings = glob.globa("quotes/*txt")
-        print(available_feelings)
+        available_feelings = glob.glob("quotes/*txt")
         # extract names of the files
+        available_feelings = [Path(filename).stem
+                              for filename in available_feelings]
+        # looks in random quotes for displaying a quote to reader
+        # needs a scroll view to make quotes flexible
+        if feel in available_feelings:
+            with open(f"quotes/{feel}.txt", encoding="utf8") as file:
+                quotes = file.readlines()
+            self.ids.quote.text = random.choice(quotes)
+        else:
+            self.ids.quote.text = "Try another feeling"
+        # print(quotes)
 
 
 class MainApp(App):
